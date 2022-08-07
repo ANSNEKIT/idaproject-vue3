@@ -14,7 +14,7 @@ $color-border: #999;
     background: $color-bg;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    padding: 10px 16px 11px 16px;
+    padding: 9px 16px 10px 16px;
     outline: none;
     resize: none;
     border: 1px solid transparent;

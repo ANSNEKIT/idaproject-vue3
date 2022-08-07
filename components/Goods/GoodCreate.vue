@@ -2,6 +2,7 @@
     <form class="good-create" @submit.prevent>
         <GoodsGoodCreateItem
             id="price-name"
+            class="good-create__item"
             label="Наименование товара"
             :is-required-label="true"
             component-name="UIBaseInput"
@@ -10,6 +11,7 @@
         />
         <GoodsGoodCreateItem
             id="description"
+            class="good-create__item"
             label="Описание товара"
             :is-required-label="true"
             component-name="UIBaseTextarea"
@@ -19,6 +21,7 @@
         />
         <GoodsGoodCreateItem
             id="image-source"
+            class="good-create__item"
             label="Ссылка на изображение товара"
             :is-required-label="true"
             component-name="UIBaseInput"
@@ -27,6 +30,7 @@
         />
         <GoodsGoodCreateItem
             id="price"
+            class="good-create__item good-create__item--last"
             label="Цена товара"
             :is-required-label="true"
             component-name="UIBaseInput"
@@ -43,7 +47,6 @@
 
 <style lang="scss" scoped>
 $color-bg: #fffefb;
-$color-require: #ff8484;
 
 .good-create {
     flex-shrink: 0;
@@ -54,28 +57,8 @@ $color-require: #ff8484;
     border-radius: 4px;
     padding: 24px;
 
-    &__element {
-        margin-bottom: 16px;
-    }
-
-    &__label {
-        position: relative;
-        font-size: 10px;
-        line-height: 13px;
-        letter-spacing: -0.02em;
-        margin-bottom: 4px;
-
-        &-require {
-            position: absolute;
-            top: 0;
-            right: -4px;
-
-            display: block;
-            width: 4px;
-            height: 4px;
-            border-radius: 4px;
-            background: $color-require;
-        }
+    &__item--last {
+        margin-bottom: 24px;
     }
 }
 </style>

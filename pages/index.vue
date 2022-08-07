@@ -1,6 +1,6 @@
 <template>
     <div class="page-index">
-        <div class="flex-container flex-justify">
+        <div class="flex-container flex-justify mb-16">
             <h1 class="page-index__title">Добавление товара</h1>
             <UIBaseDropdown :items="items" />
         </div>
@@ -14,11 +14,11 @@
 </template>
 
 <script setup>
-    const items = [
-        {value: 'default', name: 'По умолчанию'},
-        {value: 'a-z', name: 'По цене (По возрастанию)'},
-        {value: 'z-a', name: 'По цене (По убыванию)'},
-    ];
+const items = [
+    { value: 'default', name: 'По умолчанию' },
+    { value: 'a-z', name: 'По цене (A-Z)' },
+    { value: 'z-a', name: 'По цене (Z-A)' },
+];
 </script>
 
 <style lang="scss" scoped>
@@ -31,8 +31,6 @@
         font-weight: 600;
         font-size: 28px;
         line-height: 35px;
-
-        margin-bottom: 16px;
     }
 }
 
@@ -44,5 +42,9 @@
 
 .flex-justify {
     justify-content: space-between;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
 }
 </style>

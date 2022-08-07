@@ -41,15 +41,20 @@ if (props.componentName === COMPONENT_NAMES.input) {
 </script>
 
 <style lang="scss" scoped>
+$color-label: #49485e;
 $color-require: #ff8484;
+
 .good-create-element {
     margin-bottom: 16px;
 
     &__label {
+        display: inline-block;
         position: relative;
         font-size: 10px;
         line-height: 13px;
         letter-spacing: -0.02em;
+        color: $color-label;
+
         margin-bottom: 4px;
 
         &-require {

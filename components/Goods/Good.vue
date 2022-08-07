@@ -78,7 +78,7 @@ $color-remove-hover: #ff6969;
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
         0px 6px 10px rgba(0, 0, 0, 0.02);
     border-radius: 4px;
-    transition: all 0.6s ease-in-out;
+    transition: all 0.7s ease-in-out;
 
     &:hover {
         box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.15),
@@ -144,7 +144,7 @@ $color-remove-hover: #ff6969;
         height: 32px;
 
         background: $color-remove;
-        transition: all 0.4s ease-out;
+        transition: all 0.7s ease-in-out;
 
         &:hover {
             background: $color-remove-hover;
