@@ -61,7 +61,7 @@ const emit = defineEmits(['removeProduct']);
 
 const MAX_DESCRIPTION_LENGTH = 118;
 const isShowDelete = ref(false);
-const filteredPrice = computed(() => props.price.toLocaleString('ru'));
+const filteredPrice = computed(() => Number(props.price).toLocaleString('ru'));
 const shortDescription = computed(() => {
     if (props.description.length <= MAX_DESCRIPTION_LENGTH) {
         return props.description;

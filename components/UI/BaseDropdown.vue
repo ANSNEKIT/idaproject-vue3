@@ -1,5 +1,5 @@
 <template>
-    <select class="select">
+    <select class="select" @change="$emit('change', $event.target.value)">
         <option v-for="(item, index) in items" :key="index" :value="item.value">
             {{ item.name }}
         </option>
@@ -13,6 +13,7 @@ defineProps({
         default: () => [],
     },
 });
+defineEmits(['change']);
 </script>
 
 <style lang="scss" scoped>

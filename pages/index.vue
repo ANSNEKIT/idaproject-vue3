@@ -2,12 +2,12 @@
     <div class="page-index">
         <div class="flex-container flex-justify mb-16">
             <h1 class="page-index__title">Добавление товара</h1>
-            <UIBaseDropdown :items="items" />
+            <UIBaseDropdown :items="sortTypes" @change="onSortMethod" />
         </div>
         <div class="flex-container">
             <ClientOnly>
                 <GoodsGoodCreate @add-good="onAddGood" />
-                <GoodsList :items="goods" @remove-product="onRemoveProduct" />
+                <GoodsList :items="sortedProducts" @remove-product="onRemoveProduct" />
             </ClientOnly>
         </div>
         <TransitionGroup name="toast-notification" tag="div" class="tost">
@@ -34,13 +34,13 @@ const emit = defineEmits({
         requred: true,
     },
 });
-const items = [
+const sortTypes = [
     { value: 'default', name: 'По умолчанию' },
-    { value: 'a-z', name: 'По цене (A-Z)' },
-    { value: 'z-a', name: 'По цене (Z-A)' },
+    { value: 'asc', name: 'По цене (A-Z)' },
+    { value: 'desc', name: 'По цене (Z-A)' },
 ];
 
-let goods = ref([
+const goods = ref([
     {
         id: '0',
         source: '/assets/images/card-photo.jpg',
@@ -55,7 +55,7 @@ let goods = ref([
         title: 'Наименование товара 1',
         description:
             'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк.Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк.Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: '10000',
+        price: '20000',
     },
     {
         id: '2',
@@ -63,7 +63,7 @@ let goods = ref([
         title: 'Наименование товара 2',
         description:
             'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: '10000',
+        price: '9000',
     },
     {
         id: '3',
@@ -71,7 +71,7 @@ let goods = ref([
         title: 'Наименование товара 3',
         description:
             'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: '10000',
+        price: '100000',
     },
     {
         id: '4',
@@ -79,7 +79,7 @@ let goods = ref([
         title: 'Наименование товара 4',
         description:
             'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: '10000',
+        price: '1999',
     },
     {
         id: '5',
@@ -87,7 +87,7 @@ let goods = ref([
         title: 'Наименование товара 5',
         description:
             'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: '10000',
+        price: '200',
     },
     {
         id: '6',
@@ -95,7 +95,7 @@ let goods = ref([
         title: 'Наименование товара 6',
         description:
             'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: '10000',
+        price: '100500',
     },
     {
         id: '7',
@@ -103,7 +103,7 @@ let goods = ref([
         title: 'Наименование товара 7',
         description:
             'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: '10000',
+        price: '999',
     },
     {
         id: '8',
@@ -111,7 +111,7 @@ let goods = ref([
         title: 'Наименование товара 8',
         description:
             'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: '10000',
+        price: '15000',
     },
     {
         id: '9',
@@ -119,7 +119,7 @@ let goods = ref([
         title: 'Наименование товара 9',
         description:
             'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: '10000',
+        price: '38000',
     },
 ]);
 
@@ -164,6 +164,29 @@ const onRemoveProduct = (goodId) => {
         isVisibleToast.value = true;
 
         saveLocalStorage(goods.value);
+    }
+};
+
+const sortedGoods = ref([]);
+const sortedProducts = computed(() => {
+    if (sortedGoods.value.length > 0) { return sortedGoods.value }
+    return goods.value;
+});
+const sortAsc = (items) => items.sort((currentProduct, nextProduct) => Number(currentProduct.price) - Number(nextProduct.price));
+const sortDesc = (items) => items.sort((currentProduct, nextProduct) => Number(nextProduct.price) - Number(currentProduct.price));
+
+const onSortMethod = (sortType) => {
+    sortedGoods.value = [];
+
+    switch (sortType) {
+        case 'default':
+            break;
+        case 'asc':
+            sortedGoods.value = sortAsc(goods.value);
+            break;
+        case 'desc':
+            sortedGoods.value = sortDesc(goods.value);
+            break;
     }
 };
 </script>
