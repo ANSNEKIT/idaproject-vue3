@@ -57,6 +57,11 @@ $color-bg: #fffefb;
     border-radius: 4px;
     padding: 24px;
 
+    @media screen and (max-width: 800px) {
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
     &__item--last {
         margin-bottom: 24px;
     }

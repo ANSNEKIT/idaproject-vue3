@@ -38,6 +38,10 @@ const items = [
     display: flex;
     gap: 16px;
     align-items: flex-start;
+
+    @media screen and (max-width: 800px) {
+        flex-direction: column;
+    }
 }
 
 .flex-justify {

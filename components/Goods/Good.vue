@@ -72,13 +72,22 @@ $color-remove-hover: #ff6969;
 
 .card {
     position: relative;
-    width: 332px;
+    // width: 332px;
     list-style: none;
     background: $background-color;
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
         0px 6px 10px rgba(0, 0, 0, 0.02);
     border-radius: 4px;
     transition: all 0.7s ease-in-out;
+
+    @media screen and (max-width: 800px) {
+        width: 100%;
+
+        &__image {
+            max-width: 100%;
+            height: auto;
+        }
+    }
 
     &:hover {
         box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.15),
@@ -94,6 +103,10 @@ $color-remove-hover: #ff6969;
     }
 
     &__image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+
         border-radius: 4px 4px 0px 0px;
     }
 
