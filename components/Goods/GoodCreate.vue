@@ -2,6 +2,7 @@
     <form class="good-create" @submit.prevent>
         <GoodsGoodCreateItem
             id="price-name"
+            v-model.trim.lazy="good.title"
             class="good-create__item"
             label="Наименование товара"
             :is-required-label="true"
@@ -11,6 +12,7 @@
         />
         <GoodsGoodCreateItem
             id="description"
+            v-model.trim.lazy="good.description"
             class="good-create__item"
             label="Описание товара"
             :is-required-label="true"
@@ -21,6 +23,7 @@
         />
         <GoodsGoodCreateItem
             id="image-source"
+            v-model.trim.lazy="good.source"
             class="good-create__item"
             label="Ссылка на изображение товара"
             :is-required-label="true"
@@ -30,6 +33,7 @@
         />
         <GoodsGoodCreateItem
             id="price"
+            v-model.trim.lazy="good.price"
             class="good-create__item good-create__item--last"
             label="Цена товара"
             :is-required-label="true"
@@ -37,13 +41,68 @@
             type="number"
             placeholder="Введите цену"
             pattern="[0-9]+(\\.[0-9][0-9]?)?"
-            maxlenght="7"
+            min="0"
+            max="1000000"
+            :error="priceError"
         />
-        <UIBaseButton>Добавить товар</UIBaseButton>
+        <UIBaseButton :disabled="!isValidForm" @click="onAddGood"
+            >Добавить товар</UIBaseButton
+        >
     </form>
 </template>
 
-<script setup></script>
+<script setup>
+const emit = defineEmits(['addGood']);
+
+const initState = {
+    title: '',
+    description: '',
+    source: '',
+    price: '1',
+};
+const good = reactive({ ...initState });
+const priceError = reactive({
+    message: '',
+});
+const isValidForm = ref(false);
+
+const validatePrice = (price) => {
+    if (Number(price) === 0) {
+        priceError.message = 'Цена должна быть больше 0';
+        priceError.isError = true;
+    }
+
+    if (Number(price) > 0) {
+        priceError.message = '';
+        priceError.isError = false;
+    }
+};
+
+const validateForm = () => {
+    const isAllKeysValid =
+        Object.values(good).filter((el) => el.length > 0).length === 4;
+
+    if (isAllKeysValid && Number(good.price) !== 0) {
+        isValidForm.value = true;
+    } else {
+        isValidForm.value = false;
+    }
+};
+const clearForm = () => {
+    Object.assign(good, initState);
+};
+
+const onAddGood = () => {
+    emit('addGood', good);
+    clearForm();
+};
+
+watchEffect(() => {
+    const parsed = toRefs(good);
+    validatePrice(parsed.price.value);
+    validateForm();
+});
+</script>
 
 <style lang="scss" scoped>
 $color-bg: #fffefb;

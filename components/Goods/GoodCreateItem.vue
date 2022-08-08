@@ -7,7 +7,15 @@
                 class="good-create-element__label-require"
             ></span>
         </label>
-        <component :is="componentName" v-bind="$attrs" />
+        <component
+            :is="componentName"
+            v-bind="$attrs"
+            :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
+        />
+        <span v-if="isError" class="good-create-element__error">{{
+            error.message
+        }}</span>
     </div>
 </template>
 
@@ -25,6 +33,16 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    modelValue: {
+        type: String,
+        default: '',
+    },
+    error: {
+        type: Object,
+        default: () => ({
+            message: '',
+        }),
+    },
 });
 
 let componentName = null;
@@ -38,11 +56,14 @@ if (props.componentName === COMPONENT_NAMES.input) {
 } else {
     componentName = resolveComponent('UIBaseTextarea');
 }
+
+const isError = computed(() => props.error?.isError ?? false);
 </script>
 
 <style lang="scss" scoped>
 $color-label: #49485e;
 $color-require: #ff8484;
+$color-error: #b83939;
 
 .good-create-element {
     margin-bottom: 16px;
@@ -68,6 +89,9 @@ $color-require: #ff8484;
             border-radius: 4px;
             background: $color-require;
         }
+    }
+    &__error {
+        color: $color-error;
     }
 }
 </style>

@@ -5,7 +5,7 @@
         @mouseleave="isShowDelete = false"
     >
         <NuxtLink to="/good:id" class="card__link">
-            <div>
+            <div class="card__wrap">
                 <img
                     :src="source"
                     class="card__image"
@@ -15,7 +15,7 @@
                 />
                 <div class="card__body">
                     <h3 class="card__title">{{ title }}</h3>
-                    <p class="card__description">{{ description }}</p>
+                    <p class="card__description">{{ shortDescription }}</p>
                     <p class="card__price">{{ filteredPrice }} Руб.</p>
                 </div>
             </div>
@@ -33,8 +33,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
 const props = defineProps({
     id: {
         type: String,
@@ -54,13 +52,19 @@ const props = defineProps({
         default: '',
     },
     price: {
-        type: Number,
-        default: 0,
+        type: String,
+        default: '1',
     },
 });
-
+const MAX_DESCRIPTION_LENGTH = 118;
 const isShowDelete = ref(false);
 const filteredPrice = computed(() => props.price.toLocaleString('ru'));
+const shortDescription = computed(() => {
+    if (props.description.length <= MAX_DESCRIPTION_LENGTH) {
+        return props.description;
+    }
+    return props.description.substring(0, MAX_DESCRIPTION_LENGTH) + '...';
+});
 </script>
 
 <style lang="scss" scoped>
@@ -94,6 +98,13 @@ $color-remove-hover: #ff6969;
             0px 6px 10px rgba(0, 0, 0, 0.15);
     }
 
+    &__body {
+        display: flex;
+        flex-direction: column;
+        background-color: $color-white;
+        padding: 16px 16px 24px;
+    }
+
     &__link {
         display: inline-block;
         height: 100%;
@@ -108,11 +119,6 @@ $color-remove-hover: #ff6969;
         object-fit: cover;
 
         border-radius: 4px 4px 0px 0px;
-    }
-
-    &__body {
-        background-color: $color-white;
-        padding: 16px 16px 24px;
     }
 
     &__title {
@@ -136,6 +142,8 @@ $color-remove-hover: #ff6969;
     }
 
     &__price {
+        justify-self: flex-end;
+
         font-weight: 600;
         font-size: 24px;
         line-height: 30px;
