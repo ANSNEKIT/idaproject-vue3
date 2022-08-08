@@ -24,6 +24,7 @@
             v-if="isShowDelete"
             :is-show-icon="true"
             class="card__remove-btn"
+            @click="$emit('removeProduct', id)"
         >
             <template #icon>
                 <IconsDelete />
@@ -56,6 +57,8 @@ const props = defineProps({
         default: '1',
     },
 });
+const emit = defineEmits(['removeProduct']);
+
 const MAX_DESCRIPTION_LENGTH = 118;
 const isShowDelete = ref(false);
 const filteredPrice = computed(() => props.price.toLocaleString('ru'));
@@ -76,7 +79,7 @@ $color-remove-hover: #ff6969;
 
 .card {
     position: relative;
-    // width: 332px;
+    max-width: 332px;
     list-style: none;
     background: $background-color;
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
@@ -85,7 +88,7 @@ $color-remove-hover: #ff6969;
     transition: all 0.7s ease-in-out;
 
     @media screen and (max-width: 800px) {
-        width: 100%;
+        max-width: 100%;
 
         &__image {
             max-width: 100%;

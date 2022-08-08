@@ -8,6 +8,7 @@
             :title="good.title"
             :description="good.description"
             :price="good.price"
+            @remove-product="onRemoveGood"
         />
     </ul>
 </template>
@@ -22,6 +23,11 @@ defineProps({
         required: true,
     },
 });
+const emit = defineEmits(['removeProduct']);
+
+const onRemoveGood = (goodId) => {
+    emit('removeProduct', goodId);
+};
 </script>
 
 <style lang="scss" scoped>

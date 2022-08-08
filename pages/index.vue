@@ -6,14 +6,14 @@
         </div>
         <div class="flex-container">
             <ClientOnly>
-                <GoodsGoodCreate @addGood="onAddGood" />
-                <GoodsList :items="goods" />
+                <GoodsGoodCreate @add-good="onAddGood" />
+                <GoodsList :items="goods" @remove-product="onRemoveProduct" />
             </ClientOnly>
         </div>
         <TransitionGroup name="toast-notification" tag="div" class="tost">
             <UIBaseToast
                 v-if="isVisibleToast"
-                message="Товар успешно добавлен"
+                :message="toastMessage"
                 :dealay="2000"
                 @close="isVisibleToast = false"
             />
@@ -28,6 +28,11 @@ const emit = defineEmits({
         default: () => ({}),
     },
     close: {},
+    removeProduct: {
+        type: String,
+        default: '',
+        requred: true,
+    },
 });
 const items = [
     { value: 'default', name: 'По умолчанию' },
@@ -35,7 +40,7 @@ const items = [
     { value: 'z-a', name: 'По цене (Z-A)' },
 ];
 
-const goods = reactive([
+let goods = ref([
     {
         id: '0',
         source: '/assets/images/card-photo.jpg',
@@ -117,16 +122,48 @@ const goods = reactive([
         price: '10000',
     },
 ]);
+
 const isVisibleToast = ref(false);
+const toastMessage = ref('');
+
+onMounted(() => {
+    const savedGoods = getLocalStorage('goods');
+    const parsedGoods = JSON.parse(savedGoods);
+
+    if (savedGoods !== null) {
+        goods.value = parsedGoods;
+    }
+});
+
+const saveLocalStorage = (items) => localStorage.setItem('goods', JSON.stringify(items));
+const getLocalStorage = (name) => localStorage.getItem(name);
 
 const onAddGood = (good) => {
     const newGood = { ...good };
-    const index = goods.length;
+    const index = goods.value.length;
     newGood.id = String(index + 1);
-    const dublicateIndex = goods.findIndex((el) => el.id === newGood.id);
+    const dublicateIndex = goods.value.findIndex((el) => el.id === newGood.id);
+
     if (dublicateIndex === -1) {
-        goods.push(newGood);
+        goods.value.push(newGood);
+
+        toastMessage.value = 'Товар успешно добавлен';
         isVisibleToast.value = true;
+
+        saveLocalStorage(goods.value);
+    }
+};
+
+const onRemoveProduct = (goodId) => {
+    const goodIndex = goods.value.findIndex((el) => el.id === goodId) ?? {};
+
+    if (goodIndex !== -1) {
+        goods.value.splice(goodIndex, 1);
+
+        toastMessage.value = 'Товар успешно удален';
+        isVisibleToast.value = true;
+
+        saveLocalStorage(goods.value);
     }
 };
 </script>
