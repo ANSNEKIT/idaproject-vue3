@@ -2,7 +2,12 @@ import { defineNuxtConfig } from 'nuxt';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+    ssr: false,
+    target: 'static',
     css: ['~/assets/styles/global.scss'],
+    router: {
+        base: '/idaproject-vue3/',
+    },
     buildModules: [
         '@nuxtjs/eslint-module',
 
