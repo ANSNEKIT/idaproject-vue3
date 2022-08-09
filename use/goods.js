@@ -7,14 +7,14 @@ export function useGoods(isVisibleToast, toastMessage) {
     const goods = ref([
         {
             id: '0',
-            source: '/assets/images/card-photo.jpg',
+            source: '/img/card-photo.jpg',
             title: 'Наименование товара',
             description: 'Довольно-таки',
             price: '10000',
         },
         {
             id: '1',
-            source: '/assets/images/card-photo.jpg',
+            source: '/img/card-photo.jpg',
             title: 'Наименование товара 1',
             description:
                 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк.Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк.Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
@@ -22,7 +22,7 @@ export function useGoods(isVisibleToast, toastMessage) {
         },
         {
             id: '2',
-            source: '/assets/images/card-photo.jpg',
+            source: '/img/card-photo.jpg',
             title: 'Наименование товара 2',
             description:
                 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
@@ -30,7 +30,7 @@ export function useGoods(isVisibleToast, toastMessage) {
         },
         {
             id: '3',
-            source: '/assets/images/card-photo.jpg',
+            source: '/img/card-photo.jpg',
             title: 'Наименование товара 3',
             description:
                 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
@@ -38,7 +38,7 @@ export function useGoods(isVisibleToast, toastMessage) {
         },
         {
             id: '4',
-            source: '/assets/images/card-photo.jpg',
+            source: '/img/card-photo.jpg',
             title: 'Наименование товара 4',
             description:
                 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
@@ -46,7 +46,7 @@ export function useGoods(isVisibleToast, toastMessage) {
         },
         {
             id: '5',
-            source: '/assets/images/card-photo.jpg',
+            source: '/img/card-photo.jpg',
             title: 'Наименование товара 5',
             description:
                 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
@@ -54,7 +54,7 @@ export function useGoods(isVisibleToast, toastMessage) {
         },
         {
             id: '6',
-            source: '/assets/images/card-photo.jpg',
+            source: '/img/card-photo.jpg',
             title: 'Наименование товара 6',
             description:
                 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
@@ -62,7 +62,7 @@ export function useGoods(isVisibleToast, toastMessage) {
         },
         {
             id: '7',
-            source: '/assets/images/card-photo.jpg',
+            source: '/img/card-photo.jpg',
             title: 'Наименование товара 7',
             description:
                 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
@@ -70,7 +70,7 @@ export function useGoods(isVisibleToast, toastMessage) {
         },
         {
             id: '8',
-            source: '/assets/images/card-photo.jpg',
+            source: '/img/card-photo.jpg',
             title: 'Наименование товара 8',
             description:
                 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
@@ -78,7 +78,7 @@ export function useGoods(isVisibleToast, toastMessage) {
         },
         {
             id: '9',
-            source: '/assets/images/card-photo.jpg',
+            source: '/img/card-photo.jpg',
             title: 'Наименование товара 9',
             description:
                 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',

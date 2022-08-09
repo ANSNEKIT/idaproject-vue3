@@ -35,7 +35,7 @@ $color-text: #b4b4b4;
     cursor: pointer;
 
     appearance: none;
-    background: url(~/assets/images/arrow.svg) no-repeat right;
+    background: url(/img/arrow.svg) no-repeat right;
     background-position-x: calc(100% - 16px);
 
     &:active,
