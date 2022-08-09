@@ -80,6 +80,7 @@ $color-remove: #ff8484;
 $color-remove-hover: #ff6969;
 
 .card {
+    display: inline-block;
     background-color: $color-white;
     position: relative;
     max-width: 332px;
@@ -88,7 +89,7 @@ $color-remove-hover: #ff6969;
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
         0px 6px 10px rgba(0, 0, 0, 0.02);
     border-radius: 4px;
-    transition: all 0.7s ease-in-out;
+    transition: all 0.5s ease;
 
     @media screen and (max-width: 800px) {
         max-width: 100%;

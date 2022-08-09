@@ -1,5 +1,5 @@
 <template>
-    <ul class="goods">
+    <TransitionGroup class="goods" tag="ul" name="product">
         <Good
             v-for="good in items"
             :id="good.id"
@@ -10,7 +10,7 @@
             :price="good.price"
             @remove-product="onRemoveGood"
         />
-    </ul>
+    </TransitionGroup>
 </template>
 
 <script setup>
@@ -32,11 +32,21 @@ const onRemoveGood = (goodId) => {
 
 <style lang="scss" scoped>
 .goods {
+    margin: 0;
+    padding: 0;
     flex-grow: 1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 16px;
-    margin: 0;
-    padding: 0;
+}
+
+.product-enter-from,
+.product-leave-to {
+    opacity: 0;
+    transform: scale(0.4);
+}
+
+.product-leave-active {
+    position: absolute;
 }
 </style>

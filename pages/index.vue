@@ -13,7 +13,7 @@
                 />
             </ClientOnly>
         </div>
-        <TransitionGroup
+        <Transition
             ref="transition"
             name="toast-notification"
             tag="div"
@@ -25,7 +25,7 @@
                 :dealay="2000"
                 @close="isVisibleToast = false"
             />
-        </TransitionGroup>
+        </Transition>
     </div>
 </template>
 
@@ -102,9 +102,9 @@ onMounted(() => {
 
 .tost {
     position: absolute;
-    top: 30px;
+    top: 35px;
     left: 45%;
-    transition: all 0.4s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 .toast-notification-enter-active {
@@ -117,11 +117,13 @@ onMounted(() => {
 
 @keyframes toast-fade-in {
     from {
+        top: 10px;
         opacity: 0;
         transform: scale(0.4);
     }
 
     to {
+        top: 35px;
         opacity: 1;
         transform: scale(1);
     }
