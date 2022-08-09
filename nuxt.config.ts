@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     css: ['~/assets/styles/global.scss'],
     runtimeConfig: {
         public: {
-            baseURL: process.env.PUBLIC_BASE_URL,
+            baseURL: '/idaproject-vue3/',
         },
     },
     buildModules: [
