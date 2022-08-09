@@ -11,7 +11,7 @@ export default defineNuxtConfig({
         },
         app: {
             baseUrl: '/idaproject-vue3/',
-            buildAssetsDir: '/idaproject-vue3/_nuxt/',
+            // buildAssetsDir: '/idaproject-vue3/_nuxt/',
         },
     },
     router: {
