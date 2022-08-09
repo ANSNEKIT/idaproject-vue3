@@ -3,8 +3,8 @@
     "scripts": {
         "build": "nuxt build",
         "dev": "nuxt dev",
-        "generate": "nuxt generate",
-        "preview": "nuxt preview",
+        "generate": "nuxi generate",
+        "preview": "nuxi preview",
         "lint": "eslint --ext .ts.js,.vue --ignore-path .gitignore --fix .",
         "format": "prettier .  --write"
     },
