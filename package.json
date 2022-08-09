@@ -6,7 +6,8 @@
         "generate": "nuxi generate",
         "preview": "nuxi preview",
         "lint": "eslint --ext .ts.js,.vue --ignore-path .gitignore --fix .",
-        "format": "prettier .  --write"
+        "format": "prettier .  --write",
+        "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
     },
     "devDependencies": {
         "@nuxtjs/eslint-module": "^3.1.0",
@@ -18,6 +19,7 @@
         "eslint-plugin-vue": "^9.3.0",
         "nuxt": "3.0.0-rc.6",
         "prettier": "2.7.1",
+        "push-dir": "^0.4.1",
         "sass": "^1.54.3",
         "sass-loader": "10.1.1",
         "typescript": "^4.7.4"
