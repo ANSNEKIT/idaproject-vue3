@@ -5,8 +5,8 @@ export default defineNuxtConfig({
     ssr: false,
     target: 'static',
     css: ['~/assets/styles/global.scss'],
-    router: {
-        base: '/idaproject-vue3/',
+    publicRuntimeConfig: {
+        BASE_URL: process.env.API_BASE_URL,
     },
     buildModules: [
         '@nuxtjs/eslint-module',
