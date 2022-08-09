@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     target: 'static',
     css: ['~/assets/styles/global.scss'],
     publicRuntimeConfig: {
-        BASE_URL: process.env.API_BASE_URL,
+        BASE_URL: process.env.BASE_URL,
     },
     buildModules: [
         '@nuxtjs/eslint-module',
