@@ -9,6 +9,12 @@ export default defineNuxtConfig({
         public: {
             baseURL: '/idaproject-vue3/',
         },
+        app: {
+            baseUrl: '/idaproject-vue3/',
+        },
+    },
+    router: {
+        base: '/idaproject-vue3/',
     },
     buildModules: [
         '@nuxtjs/eslint-module',
