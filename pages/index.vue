@@ -48,6 +48,7 @@ const emit = defineEmits({
     },
 });
 
+const { isVisibleToast, toastMessage } = useToasts();
 const { goods, sortedBuffer, onAddGood, onRemoveProduct } = useGoods(
     isVisibleToast,
     toastMessage

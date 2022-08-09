@@ -88,8 +88,8 @@ export function useGoods(isVisibleToast, toastMessage) {
     const sortedBuffer = ref([]);
 
     const onAddGood = (good) => {
-        const index = goods.value.length;
-        good.id = String(index + 1);
+        good.id = String(Date.now());
+
         const goodIndex = goods.value.findIndex((el) => el.id === good.id);
         const sortBufferIndex = sortedBuffer.value.findIndex((el) => el.id === good.id);
 
