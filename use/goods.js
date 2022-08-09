@@ -1,4 +1,4 @@
-import {ref} from 'vue';
+import { ref } from 'vue';
 import { useLocalStorage } from './localStorage';
 
 export function useGoods(isVisibleToast, toastMessage) {
@@ -85,35 +85,45 @@ export function useGoods(isVisibleToast, toastMessage) {
             price: '38000',
         },
     ]);
+    const sortedBuffer = ref([]);
 
     const onAddGood = (good) => {
-        const newGood = { ...good };
         const index = goods.value.length;
-        newGood.id = String(index + 1);
-        const dublicateIndex = goods.value.findIndex((el) => el.id === newGood.id);
-    
-        if (dublicateIndex === -1) {
-            goods.value.push(newGood);
-    
+        good.id = String(index + 1);
+        const goodIndex = goods.value.findIndex((el) => el.id === good.id);
+        const sortBufferIndex = sortedBuffer.value.findIndex((el) => el.id === good.id);
+
+        if (goodIndex === -1) {
+            goods.value.push(good);
+
             toastMessage.value = 'Товар успешно добавлен';
             isVisibleToast.value = true;
-    
+
             saveLocalStorage(goods.value);
         }
-    };
-    
-    const onRemoveProduct = (goodId) => {
-        const goodIndex = goods.value.findIndex((el) => el.id === goodId) ?? {};
-    
-        if (goodIndex !== -1) {
-            goods.value.splice(goodIndex, 1);
-    
-            toastMessage.value = 'Товар успешно удален';
-            isVisibleToast.value = true;
-    
-            saveLocalStorage(goods.value);
+
+        if (sortedBuffer.value.length > 0 && sortBufferIndex === -1) {
+            sortedBuffer.value.push(good);
         }
     };
 
-    return { goods, onAddGood, onRemoveProduct };
+    const onRemoveProduct = (goodId) => {
+        const goodIndex = goods.value.findIndex((el) => el.id === goodId);
+        const sortBufferIndex = sortedBuffer.value.findIndex((el) => el.id === goodId);
+
+        if (goodIndex !== -1) {
+            goods.value.splice(goodIndex, 1);
+
+            toastMessage.value = 'Товар успешно удален';
+            isVisibleToast.value = true;
+
+            saveLocalStorage(goods.value);
+        }
+
+        if (sortedBuffer.value.length > 0 && sortBufferIndex !== -1) {
+            sortedBuffer.value.splice(sortBufferIndex, 1);
+        }
+    };
+
+    return { goods, sortedBuffer, onAddGood, onRemoveProduct };
 }

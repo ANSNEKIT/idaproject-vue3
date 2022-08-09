@@ -48,13 +48,12 @@ const emit = defineEmits({
     },
 });
 
-const { isVisibleToast, toastMessage } = useToasts();
-const { goods, onAddGood, onRemoveProduct } = useGoods(
+const { goods, sortedBuffer, onAddGood, onRemoveProduct } = useGoods(
     isVisibleToast,
     toastMessage
 );
 const { getLocalStorage } = useLocalStorage();
-const { sortTypes, sortedGoods, onSortMethod } = useSort(goods);
+const { sortTypes, sortedGoods, onSortMethod } = useSort(goods, sortedBuffer);
 
 onMounted(() => {
     const savedGoods = getLocalStorage('goods');

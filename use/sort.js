@@ -1,15 +1,15 @@
-import {ref, computed} from 'vue';
+import { computed } from 'vue';
 
-export function useSort(goods) {
+export function useSort(goods, sortedBuffer) {
     const sortTypes = [
         { value: 'default', name: 'По умолчанию' },
         { value: 'asc', name: 'По цене (По возрастанию)' },
         { value: 'desc', name: 'По цене (По убыванию)' },
     ];
-    const _sortedBuffer = ref([]);
+
     const sortedGoods = computed(() => {
-        if (_sortedBuffer.value.length > 0) {
-            return _sortedBuffer.value;
+        if (sortedBuffer.value.length > 0) {
+            return sortedBuffer.value;
         }
         return goods.value;
     });
@@ -32,17 +32,17 @@ export function useSort(goods) {
     };
 
     const onSortMethod = (sortType) => {
-        _sortedBuffer.value = [];
+        sortedBuffer.value = [];
 
         switch (sortType) {
             case 'default':
-                _sortedBuffer.value = [];
+                sortedBuffer.value = [];
                 break;
             case 'asc':
-                _sortedBuffer.value = sortAsc(goods.value);
+                sortedBuffer.value = sortAsc(goods.value);
                 break;
             case 'desc':
-                _sortedBuffer.value = sortDesc(goods.value);
+                sortedBuffer.value = sortDesc(goods.value);
                 break;
         }
     };

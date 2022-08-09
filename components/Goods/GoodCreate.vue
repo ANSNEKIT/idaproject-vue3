@@ -2,7 +2,7 @@
     <form class="good-create" @submit.prevent>
         <GoodsGoodCreateItem
             id="price-name"
-            v-model.trim.lazy="good.title.value"
+            v-model.trim.lazy="form.title.value"
             class="good-create__item"
             label="Наименование товара"
             :is-required-label="true"
@@ -12,7 +12,7 @@
         />
         <GoodsGoodCreateItem
             id="description"
-            v-model.trim.lazy="good.description.value"
+            v-model.trim.lazy="form.description.value"
             class="good-create__item"
             label="Описание товара"
             :is-required-label="true"
@@ -23,7 +23,7 @@
         />
         <GoodsGoodCreateItem
             id="image-source"
-            v-model.trim.lazy="good.source.value"
+            v-model.trim.lazy="form.source.value"
             class="good-create__item"
             label="Ссылка на изображение товара"
             :is-required-label="true"
@@ -33,7 +33,7 @@
         />
         <GoodsGoodCreateItem
             id="price"
-            v-model.trim.lazy="good.price.value"
+            v-model.trim.lazy="form.price.value"
             class="good-create__item good-create__item--last"
             label="Цена товара"
             :is-required-label="true"
@@ -43,7 +43,7 @@
             pattern="[0-9]+(\\.[0-9][0-9]?)?"
             min="0"
             max="1000000"
-            :error="good.price.error"
+            :error="form.price.error"
         />
         <UIBaseButton :disabled="!isValidForm" @click="onAddGood"
             >Добавить товар</UIBaseButton
@@ -74,14 +74,20 @@ const initState = {
         error: '',
     },
 };
-const good = reactive({ ...initState });
-const { isValidForm, validate, validateErros } = useValidate(good);
+const form = reactive({ ...initState });
+const { isValidForm, validate, validateErros } = useValidate(form);
 
 const clearForm = () => {
-    Object.assign(good, initState);
+    Object.assign(form, initState);
 };
 
 const onAddGood = () => {
+    const good = {
+        source: form.source.value,
+        title: form.title.value,
+        description: form.description.value,
+        price: form.price.value,
+    };
     emit('addGood', good);
     clearForm();
 };
