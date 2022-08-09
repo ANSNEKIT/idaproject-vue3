@@ -14,7 +14,7 @@
             @input="$emit('update:modelValue', $event.target.value)"
         />
         <span v-if="isError" class="good-create-element__error">{{
-            error.message
+            error
         }}</span>
     </div>
 </template>
@@ -38,15 +38,13 @@ const props = defineProps({
         default: '',
     },
     error: {
-        type: Object,
-        default: () => ({
-            message: '',
-        }),
+        type: String,
+        default: '',
     },
 });
+const isError = computed(() => !props.error.message);
 
 let componentName = null;
-
 const COMPONENT_NAMES = {
     input: 'UIBaseInput',
     textarea: 'UIBaseTextarea',
@@ -56,8 +54,6 @@ if (props.componentName === COMPONENT_NAMES.input) {
 } else {
     componentName = resolveComponent('UIBaseTextarea');
 }
-
-const isError = computed(() => props.error?.isError ?? false);
 </script>
 
 <style lang="scss" scoped>

@@ -5,17 +5,19 @@
         @mouseleave="isShowDelete = false"
     >
         <NuxtLink to="/good:id" class="card__link">
-            <div class="card__wrap">
-                <img
-                    :src="source"
-                    class="card__image"
-                    alt="good image"
-                    width="332"
-                    height="200"
-                />
-                <div class="card__body">
+            <img
+                :src="source"
+                class="card__image"
+                alt="good image"
+                width="332"
+                height="200"
+            />
+            <div class="card__body">
+                <div class="card__body-top">
                     <h3 class="card__title">{{ title }}</h3>
                     <p class="card__description">{{ shortDescription }}</p>
+                </div>
+                <div class="card__body-bottom">
                     <p class="card__price">{{ filteredPrice }} Руб.</p>
                 </div>
             </div>
@@ -78,6 +80,7 @@ $color-remove: #ff8484;
 $color-remove-hover: #ff6969;
 
 .card {
+    background-color: $color-white;
     position: relative;
     max-width: 332px;
     list-style: none;
@@ -101,19 +104,22 @@ $color-remove-hover: #ff6969;
             0px 6px 10px rgba(0, 0, 0, 0.15);
     }
 
-    &__body {
+    &__link {
         display: flex;
         flex-direction: column;
-        background-color: $color-white;
-        padding: 16px 16px 24px;
-    }
 
-    &__link {
-        display: inline-block;
         height: 100%;
 
         text-decoration: none;
         color: $color-black;
+    }
+
+    &__body {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 16px 16px 24px;
     }
 
     &__image {

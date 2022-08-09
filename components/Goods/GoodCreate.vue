@@ -2,7 +2,7 @@
     <form class="good-create" @submit.prevent>
         <GoodsGoodCreateItem
             id="price-name"
-            v-model.trim.lazy="good.title"
+            v-model.trim.lazy="good.title.value"
             class="good-create__item"
             label="Наименование товара"
             :is-required-label="true"
@@ -12,7 +12,7 @@
         />
         <GoodsGoodCreateItem
             id="description"
-            v-model.trim.lazy="good.description"
+            v-model.trim.lazy="good.description.value"
             class="good-create__item"
             label="Описание товара"
             :is-required-label="true"
@@ -23,7 +23,7 @@
         />
         <GoodsGoodCreateItem
             id="image-source"
-            v-model.trim.lazy="good.source"
+            v-model.trim.lazy="good.source.value"
             class="good-create__item"
             label="Ссылка на изображение товара"
             :is-required-label="true"
@@ -33,7 +33,7 @@
         />
         <GoodsGoodCreateItem
             id="price"
-            v-model.trim.lazy="good.price"
+            v-model.trim.lazy="good.price.value"
             class="good-create__item good-create__item--last"
             label="Цена товара"
             :is-required-label="true"
@@ -43,7 +43,7 @@
             pattern="[0-9]+(\\.[0-9][0-9]?)?"
             min="0"
             max="1000000"
-            :error="priceError"
+            :error="good.price.error"
         />
         <UIBaseButton :disabled="!isValidForm" @click="onAddGood"
             >Добавить товар</UIBaseButton
@@ -52,42 +52,31 @@
 </template>
 
 <script setup>
+import { useValidate } from '~/use/validate.js';
+
 const emit = defineEmits(['addGood']);
 
 const initState = {
-    title: '',
-    description: '',
-    source: '',
-    price: '1',
+    title: {
+        value: '',
+        error: '',
+    },
+    description: {
+        value: '',
+        error: '',
+    },
+    source: {
+        value: '',
+        error: '',
+    },
+    price: {
+        value: '1',
+        error: '',
+    },
 };
 const good = reactive({ ...initState });
-const priceError = reactive({
-    message: '',
-});
-const isValidForm = ref(false);
+const { isValidForm, validate, validateErros } = useValidate(good);
 
-const validatePrice = (price) => {
-    if (Number(price) === 0) {
-        priceError.message = 'Цена должна быть больше 0';
-        priceError.isError = true;
-    }
-
-    if (Number(price) > 0) {
-        priceError.message = '';
-        priceError.isError = false;
-    }
-};
-
-const validateForm = () => {
-    const isAllKeysValid =
-        Object.values(good).filter((el) => el.length > 0).length === 4;
-
-    if (isAllKeysValid && Number(good.price) !== 0) {
-        isValidForm.value = true;
-    } else {
-        isValidForm.value = false;
-    }
-};
 const clearForm = () => {
     Object.assign(good, initState);
 };
@@ -98,9 +87,8 @@ const onAddGood = () => {
 };
 
 watchEffect(() => {
-    const parsed = toRefs(good);
-    validatePrice(parsed.price.value);
-    validateForm();
+    validate();
+    validateErros();
 });
 </script>
 

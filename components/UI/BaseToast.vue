@@ -1,5 +1,5 @@
 <template>
-    <div class="tost" @click.prevent="onClose">
+    <div class="tost" @click="onClose">
         {{ message }}
     </div>
 </template>
@@ -17,9 +17,7 @@ const props = defineProps({
 });
 const emit = defineEmits(['close']);
 
-const onClose = () => {
-    emit('close');
-};
+const onClose = () => emit('close');
 onMounted(() => {
     setTimeout(onClose, props.dealay);
 });
