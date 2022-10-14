@@ -1,6 +1,6 @@
 # Idaproject Vue3
 
-## Проект собран на Vue 3 + Vite
+## Проект собран на Nuxt 3 + Typescript
 
 Ссылка на демо - [Idaproject vue3 demo](https://)
 
