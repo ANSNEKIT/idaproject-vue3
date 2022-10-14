@@ -1,4 +1,4 @@
-# Idaproject Vue3
+# Idaproject Nuxt 3
 
 ## Проект собран на Nuxt 3 + Typescript
 
